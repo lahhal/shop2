@@ -25,7 +25,7 @@ SECRET_KEY = 'de=_+^n!@z^q&7_hnf_0xpj%r7eul_dtc@+qi=f&%%@t-3m9%#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True    # True는 개발 중이라는 상태, 상용화될 때는 False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['lahhal.pythonanywhere.com']
 
 
 # Application definition
