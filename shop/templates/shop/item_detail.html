@@ -1,0 +1,68 @@
+{% extends './layout.html' %}
+{% load static %}
+
+{% block content %}
+    <a href="{% url 'shop:item_list' %}">상품 목록으로 돌아가기</a><br/><br/>
+
+    <table>
+        <thead>
+            <th>필드</th>
+            <th>내용</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td width="10%">번호:</td>
+                <td>{{ item.id }}</td>
+            </tr>
+            <tr>
+                <td>제품명:</td>
+                <td>{{ item.name }}</td>
+            </tr>
+            <tr>
+                <td>요약정보:</td>
+                <td>{{ item.short_desc }}</td>
+            </tr>
+            <tr>
+                <td>이미지:</td>
+                <td>{% if item.photo %}<img src="{{ item.photo.url }}" />{% endif %}</td>
+            </tr>
+            <tr>
+                <td>상세정보:</td>
+                <td>{{ item.desc|linebreaksbr }}</td>
+            </tr>
+            <tr>
+                <td>게시 일시:</td>
+                <td>{{ item.created_at }}</td>
+            </tr>
+            <tr>
+                <td>수정 일시:</td>
+                <td>{{ item.updated }}</td>
+            </tr>
+            <tr>
+                <td>태그:</td>
+                <td>{{ item.tagged }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br/><br/><hr><br/><br/>
+
+    <table>
+        <thead>
+            <th>id</th>
+            <th>상품평</th>
+            <th>작성 일시</th>
+            <th>수정 일시</th>
+        </thead>
+        <tbody>
+            {% for c in item.reviews.all %}
+                <tr>
+                    <td>{{ c.id }}</td>
+                    <td>{{ c.message|linebreaksbr }}</td>
+                    <td>{{ c.created_at }}</td>
+                    <td>{{ c.updated }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

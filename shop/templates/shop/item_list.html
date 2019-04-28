@@ -1,0 +1,62 @@
+<!-- shop/templates/shop/item_list.html -->
+{% extends './layout.html' %}
+{% load static %}
+
+{% block content %}
+    {{ block.super }}
+    <form action="" method="GET">
+        <input type="text" name="q" value="{{ q }}" />
+        <input type="submit" value="검색" />
+    </form>
+    <hr>
+    <table>
+        <thead>
+            <th>번호</th>
+            <th>이름</th>
+            <th>설명</th>
+            <th>사진</th>
+            <th>등록 일시</th>
+            <th>수정 일시</th>
+        </thead>
+        <tbody>
+            {% for item in item_list %}
+            <tr>
+                <td> {{ item.id }} </td>
+                <td>
+                    <a href="{{ item.get_absolute_url }}">
+                    <!--<a href="/shop/{{ item.pk }}">-->
+                        {# href="shop/..."로 하면 오류!!! #}
+                        {{ item.name }}
+                    </a>
+                </td>
+                <td> {{ item.desc }} </td>
+                <td> {{ item.photo }} </td>
+                <td> {{ item.created_at }} </td>
+                <td> {{ item.updated_at }} </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table> <br/><br/>
+
+{#    {{ request }} <br/>#}
+{#    request.method: {{ request.method }} <br/>#}
+{#    request.GET: {{ request.GET }} <br/>#}
+{#    request.META: {{ request.META }}#}
+    <hr/>
+    {{ item_list }}
+    <hr>
+    {% for item in item_list %}
+        {{ item }} <br>
+    {% endfor %}
+    <hr>
+    {% for item in item_list %}
+        {{ item.name }} #
+        {{ item.desc }} #
+        {{ item.photo }} #
+        {{ item.created_at }} #
+        {{ item.updated_at }} <br/>
+        {% if item.photo %}
+            <img src="{{ item.photo.url }}" />
+        {% endif %} <br/>
+    {% endfor %}
+{% endblock %}
